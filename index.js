@@ -1,12 +1,10 @@
 // index.js
 const express = require('express');
 const app = express();
-const PORT = process.env.PORT || 3000; // Use the port set by Vercel or default to 3000
+const PORT = process.env.PORT || 3000;
 
-// Middleware to parse JSON requests
 app.use(express.json());
 
-// In-memory storage
 let dataStore = {};
 
 // Endpoint to push data
@@ -33,4 +31,12 @@ app.get('/get/:key', (req, res) => {
   return res.status(200).json({ key, value });
 });
 
-// Roo
+// Root endpoint for health check
+app.get('/', (req, res) => {
+  res.status(200).send('Welcome to the Scratch Server API!');
+});
+
+// Start the server
+app.listen(PORT, () => {
+  console.log(`Server is running on http://localhost:${PORT}`);
+});
